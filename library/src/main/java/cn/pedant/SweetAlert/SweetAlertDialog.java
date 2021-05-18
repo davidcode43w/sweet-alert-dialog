@@ -42,6 +42,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private Animation mSuccessBowAnim;
     private TextView mTitleTextView;
     private TextView mContentTextView;
+    private ScrollView mContentScrollView;
     private FrameLayout mCustomViewContainer;
     private View mCustomView;
     private String mTitleText;
@@ -190,6 +191,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         mTitleTextView = findViewById(R.id.title_text);
         mContentTextView = findViewById(R.id.content_text);
+        mContentScrollView = findViewById(R.id.content_scroll);
         mCustomViewContainer = findViewById(R.id.custom_view_container);
         mErrorFrame = findViewById(R.id.error_frame);
         mErrorX = mErrorFrame.findViewById(R.id.error_x);
@@ -371,7 +373,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 mContentTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, spToPx(contentTextSize, getContext()));
             }
             mContentTextView.setText(Html.fromHtml(mContentText));
-            mContentTextView.setVisibility(View.VISIBLE);
+            mContentScrollView.setVisibility(View.VISIBLE);
             mCustomViewContainer.setVisibility(View.GONE);
         }
         return this;
@@ -416,8 +418,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     public SweetAlertDialog showContentText(boolean isShow) {
         mShowContent = isShow;
-        if (mContentTextView != null) {
-            mContentTextView.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
+        if (mContentScrollView != null) {
+            mContentScrollView.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
         }
         return this;
     }
@@ -645,7 +647,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         if (mCustomView != null && mCustomViewContainer != null) {
             mCustomViewContainer.addView(view);
             mCustomViewContainer.setVisibility(View.VISIBLE);
-            mContentTextView.setVisibility(View.GONE);
+            mContentScrollView.setVisibility(View.GONE);
         }
         return this;
     }
